@@ -6,6 +6,10 @@
 
 - name: LTTng (apt install lttng/{{ lttng_version }})
   apt:
+    update_cache: yes
+
+- name: LTTng (apt install lttng/{{ lttng_version }})
+  apt:
     name:
       - lttng-tools
       - liblttng-ust-dev
