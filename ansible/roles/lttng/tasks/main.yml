@@ -4,15 +4,12 @@
     update_cache: true
   become: true
 
-- name: LTTng (apt update)
-  apt:
-    update_cache: yes
-
 - name: LTTng (apt install lttng/{{ lttng_version }})
   apt:
     name:
       - lttng-tools
       - liblttng-ust-dev
+    state: latest
   become: true
 
 - name: LTTng (install babeltrace)
