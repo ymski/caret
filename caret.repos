@@ -20,3 +20,8 @@ repositories:
     type: git
     url: https://github.com/tier4/caret_common.git
     version: main
+  # for iron
+  eclipse-cyclonedds/cyclonedds:
+    type: git
+    url: https://github.com/eclipse-cyclonedds/cyclonedds.git
+    version: releases/0.10.x

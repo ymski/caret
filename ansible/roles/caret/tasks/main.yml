@@ -50,9 +50,19 @@
     mode: 0755
   become: false
 
+- name: caret (Comment out the pattern in CMakeLists.txt)
+  lineinfile:
+    path: "{{ WORKSPACE_ROOT }}/src/eclipse-cyclonedds/cyclonedds/src/core/CMakeLists.txt"
+    regexp: "set_property(TARGET ddsc PROPERTY C_VISIBILITY_PRESET hidden)"
+    line: '#\g<0>'
+  become: true
+
 - name: caret (copy topic filter as reference)
   ansible.builtin.template:
     src: "{{ caret_topic_filter_template }}"
     dest: "{{ WORKSPACE_ROOT }}/caret_topic_filter.bash"
     mode: 0755
   become: false
+
+- name: cyclonedds (Disable description to delete symbols)
+  command: sed -i "s/^set_property(TARGET ddsc PROPERTY C_VISIBILITY_PRESET hidden)/\# &/" "{{ WORKSPACE_ROOT }}"/src/eclipse-cyclonedds/cyclonedds/src/core/CMakeLists.txt
