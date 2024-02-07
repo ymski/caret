@@ -13,24 +13,24 @@ repositories:
     version: 4a2415f37a3c8d14f8fd7b63057e82755dfc6a22
   CARET/CARET_trace:
     type: git
-    url: https://github.com/tier4/CARET_trace.git
-    version: v0.4.16.1
+    url: https://github.com/ymski/CARET_trace.git
+    version: add_multihost_trace
   CARET/CARET_analyze:
     type: git
-    url: https://github.com/tier4/CARET_analyze.git
-    version: v0.4.16.1
+    url: https://github.com/ymski/CARET_analyze.git
+    version: feat/multihost
   CARET/CARET_analyze_cpp_impl:
     type: git
     url: https://github.com/tier4/CARET_analyze_cpp_impl.git
-    version: v0.4.16.1
+    version: main
   CARET/ros2caret:
     type: git
-    url: https://github.com/tier4/ros2caret.git
-    version: v0.4.16.1
+    url: https://github.com/ymski/ros2caret.git
+    version: feat/multihost
   CARET/caret_common:
     type: git
     url: https://github.com/tier4/caret_common.git
-    version: v0.4.16.1
+    version: main
   eclipse-cyclonedds/cyclonedds:
     type: git
     url: https://github.com/eclipse-cyclonedds/cyclonedds.git
