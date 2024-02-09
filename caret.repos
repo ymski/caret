@@ -14,7 +14,7 @@ repositories:
   caret/caret_trace:
     type: git
     url: https://github.com/ymski/caret_trace.git
-    version: add_multihost_trace
+    version: feat/add_multihost_trace
   caret/caret_analyze:
     type: git
     url: https://github.com/ymski/caret_analyze.git
