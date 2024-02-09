@@ -6,15 +6,15 @@ repositories:
   ros2/rclcpp:
     type: git
     url: https://github.com/tier4/rclcpp.git
-    version: humble-with-fix-service-connection-patch-tracepoint-added
+    version: humble_tracepoint_added
   ros-tracing/ros2_tracing:
     type: git
     url: https://github.com/tier4/ros2_tracing.git
-    version: 4a2415f37a3c8d14f8fd7b63057e82755dfc6a22
+    version: humble_tracepoint_added
   caret/caret_trace:
     type: git
     url: https://github.com/ymski/caret_trace.git
-    version: add_multihost_trace
+    version: feat/add_multihost_trace
   caret/caret_analyze:
     type: git
     url: https://github.com/ymski/caret_analyze.git
