@@ -11,23 +11,23 @@ repositories:
     type: git
     url: https://github.com/tier4/ros2_tracing.git
     version: 4a2415f37a3c8d14f8fd7b63057e82755dfc6a22
-  CARET/CARET_trace:
+  caret/caret_trace:
     type: git
-    url: https://github.com/ymski/CARET_trace.git
+    url: https://github.com/ymski/caret_trace.git
     version: add_multihost_trace
-  CARET/CARET_analyze:
+  caret/caret_analyze:
     type: git
-    url: https://github.com/ymski/CARET_analyze.git
+    url: https://github.com/ymski/caret_analyze.git
     version: feat/multihost
-  CARET/CARET_analyze_cpp_impl:
+  caret/caret_analyze_cpp_impl:
     type: git
-    url: https://github.com/tier4/CARET_analyze_cpp_impl.git
+    url: https://github.com/tier4/caret_analyze_cpp_impl.git
     version: main
-  CARET/ros2caret:
+  caret/ros2caret:
     type: git
     url: https://github.com/ymski/ros2caret.git
     version: feat/multihost
-  CARET/caret_common:
+  caret/caret_common:
     type: git
     url: https://github.com/tier4/caret_common.git
     version: main
