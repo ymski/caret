@@ -39,7 +39,8 @@
   pip:
     requirements: "{{ requirements_path }}"
     executable: pip3
-  become: true
+    extra_args: --break-system-packages
+  become: false
   args:
     chdir: "{{ WORKSPACE_ROOT }}"
 
