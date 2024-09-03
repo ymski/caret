@@ -14,7 +14,7 @@ function show_usage() {
     exit 0
 }
 
-ALLOWED_ROS_DISTRO=("humble" "iron")
+ALLOWED_ROS_DISTRO=("humble" "iron", "jazzy")
 
 function validate_ros_distro() {
     if [[ " ${ALLOWED_ROS_DISTRO[*]} " != *" $1 "* ]]; then
@@ -117,6 +117,9 @@ fi
 PLAYBOOK="playbook.yml"
 if [ "$ros_distro" = "iron" ]; then
     PLAYBOOK="playbook_iron.yml"
+fi
+elif [ "$ros_distro" = "jazzy" ]; then
+    PLAYBOOK="playbook_jazzy.yml"
 fi
 
 # Run ansible
