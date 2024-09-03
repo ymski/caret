@@ -118,7 +118,6 @@ fi
 PLAYBOOK="playbook.yml"
 if [ "$ros_distro" = "iron" ]; then
     PLAYBOOK="playbook_iron.yml"
-fi
 elif [ "$ros_distro" = "jazzy" ]; then
     PLAYBOOK="playbook_jazzy.yml"
 fi
