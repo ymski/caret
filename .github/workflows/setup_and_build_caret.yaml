@@ -30,7 +30,7 @@ jobs:
           mkdir src && \
           vcs import src < caret.repos && \
           . /opt/ros/${{ matrix.ros_distro }}/setup.sh && \
-          ./setup_caret.sh -c
+          ./setup_caret.sh -c -d ${{ matrix.ros_distro }}
 
       - name: Build
         shell: bash
