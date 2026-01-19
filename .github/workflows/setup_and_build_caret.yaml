@@ -1,0 +1,40 @@
+name: Build with Autoware
+
+on:
+  schedule:
+    - cron: 0 17 * * * # run at 2 AM JST
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        ros_distro: [humble, iron, jazzy]
+
+    runs-on: ubuntu-latest
+    container:
+      image: ros:${{ matrix.ros_distro }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Clean up disk space
+        run: |
+          sudo apt-get autoremove -y
+          sudo apt-get clean
+          sudo rm -rf /usr/share/dotnet
+          docker system prune -a -f --volumes || true
+
+      - name: setup CARET
+        run: |
+          mkdir src && \
+          vcs import src < caret.repos && \
+          source /opt/ros/${{ matrix.ros_distro }}/setup.sh && \
+          ./setup_caret.sh -c
+
+      - name: Build
+        shell: bash
+        run: |
+          source /opt/ros/${{ matrix.ros_distro }}/setup.bash
+          colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
