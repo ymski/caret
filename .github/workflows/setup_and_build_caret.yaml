@@ -14,8 +14,6 @@ jobs:
         # ros_distro: [humble, iron, jazzy]
 
     runs-on: ubuntu-latest
-    container:
-      image: ros:${{ matrix.ros_distro }}
 
     steps:
       - uses: actions/checkout@v5
