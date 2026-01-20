@@ -41,11 +41,11 @@ RUN echo "===== Setup CARET ====="
 RUN cd ros2_caret_ws && \
     mkdir src && \
     vcs import src < caret.repos && \
-    . /opt/ros/"$ROS_DISTRO"/setup.sh && \
+    . /opt/ros/$ROS_DISTRO/setup.sh && \
     ./setup_caret.sh -c -d "$ROS_DISTRO"
 
 RUN echo "===== Build CARET ====="
 RUN cd ros2_caret_ws && \
-    . /opt/ros/"$ROS_DISTRO"/setup.sh && \
+    . /opt/ros/$ROS_DISTRO/setup.sh && \
     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
 
