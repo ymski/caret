@@ -25,7 +25,7 @@ RUN if [ "$ROS_DISTRO" = "jazzy" ]; then \
       apt-get update && \
       apt-get install -y python3-pip python3-virtualenv && \
       virtualenv -p python3 --system-site-packages $HOME/venv/jazzy ; \
-      . $HOME/venv/jazzy/bin/activate
+      . $HOME/venv/jazzy/bin/activate \
     fi
 
 # cspell: disable
