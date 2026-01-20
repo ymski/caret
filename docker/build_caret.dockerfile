@@ -27,6 +27,7 @@ RUN if [ "$ROS_DISTRO" = "jazzy" ]; then \
       virtualenv -p python3 --system-site-packages $HOME/venv/jazzy ; \
     fi
 
+# venv for jazzy
 ENV VENV_DIR=$HOME/venv/jazzy
 
 # cspell: disable
