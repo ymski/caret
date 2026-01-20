@@ -37,10 +37,19 @@ RUN apt update && apt install -y git && \
 RUN echo "===== Setup CARET ====="
 RUN cd ros2_caret_ws && \
     mkdir src && \
-    vcs import src < caret.repos && \
+    if [ "$ROS_DISTRO" = "humble" ]; then \
+        REPOS_FILE=caret.repos ; \
+    elif [ "$ROS_DISTRO" = "iron" ]; then \
+        REPOS_FILE=caret_iron.repos ; \
+    elif [ "$ROS_DISTRO" = "jazzy" ]; then \
+        REPOS_FILE=caret_jazzy.repos ; \
+    else \
+        echo "Unsupported ROS_DISTRO: $ROS_DISTRO" && exit 1 ; \
+    fi && \
+    vcs import src < $REPOS_FILE && \
     . /opt/ros/"$ROS_DISTRO"/setup.sh && \
     if [ "$ROS_DISTRO" = "jazzy" ]; then \
-      . $HOME/venv/jazzy/bin/activate ; \
+        . $HOME/venv/jazzy/bin/activate ; \
     fi && \
     ./setup_caret.sh -c -d "$ROS_DISTRO"
 
