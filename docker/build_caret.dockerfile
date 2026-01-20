@@ -18,8 +18,9 @@ ENV TZ=Asia/Tokyo
 # Do not use cache
 ADD "https://www.random.org/sequences/?min=1&max=52&col=1&format=plain&rnd=new" /dev/null
 
-COPY ./ /ros2_caret_ws
-
+RUN git clone https://github.com/your_org/ros2_caret_ws.git /ros2_caret_ws && \
+    cd /ros2_caret_ws && \
+    git checkout ${CARET_VERSION}
 
 RUN if [ "$ROS_DISTRO" = "jazzy" ]; then \
       apt-get update && \
