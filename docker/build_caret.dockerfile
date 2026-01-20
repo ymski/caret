@@ -27,9 +27,6 @@ RUN if [ "$ROS_DISTRO" = "jazzy" ]; then \
       virtualenv -p python3 --system-site-packages $HOME/venv/jazzy ; \
     fi
 
-# venv for jazzy
-ENV VENV_DIR=$HOME/venv/jazzy
-
 # cspell: disable
 RUN apt update && apt install -y git && \
     apt-get install -y tzdata && \
@@ -41,11 +38,17 @@ RUN echo "===== Setup CARET ====="
 RUN cd ros2_caret_ws && \
     mkdir src && \
     vcs import src < caret.repos && \
-    . /opt/ros/$ROS_DISTRO/setup.sh && \
-    ./setup_caret.sh -c -d $ROS_DISTRO
+    . /opt/ros/"$ROS_DISTRO"/setup.sh && \
+    if [ "$ROS_DISTRO" = "jazzy" ]; then \
+      . $HOME/venv/jazzy/bin/activate ; \
+    fi && \
+    ./setup_caret.sh -c -d "$ROS_DISTRO"
 
 RUN echo "===== Build CARET ====="
 RUN cd ros2_caret_ws && \
-    . /opt/ros/$ROS_DISTRO/setup.sh && \
+    . /opt/ros/"$ROS_DISTRO"/setup.sh && \
+    if [ "$ROS_DISTRO" = "jazzy" ]; then \
+      . $HOME/venv/jazzy/bin/activate ; \
+    fi && \
     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
 
