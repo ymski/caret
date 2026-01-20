@@ -1,7 +1,7 @@
 ARG ROS_DISTRO=humble
-FROM ros:${ROS_DISTRO}
-
 ARG CARET_VERSION="main"
+
+FROM ros:${ROS_DISTRO}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
