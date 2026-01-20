@@ -26,27 +26,7 @@ jobs:
           sudo apt-get clean
           sudo rm -rf /usr/share/dotnet
 
-      - name: setup virtual env(only for Jazzy)
+      - name: Docker Build
         run: |
-          set -e
-
-          if [[ "${{ matrix.ros_distro }}" == "jazzy" ]]; then
-            sudo apt install python3-pip
-            sudo apt-get install python3-virtualenv
-
-            virtualenv -p python3 --system-site-packages ./venv/jazzy
-            . ./venv/jazzy/bin/activate
-          fi
-
-      - name: setup CARET
-        run: |
-          mkdir src && \
-          vcs import src < caret.repos && \
-          . /opt/ros/${{ matrix.ros_distro }}/setup.sh && \
-          ./setup_caret.sh -c -d ${{ matrix.ros_distro }}
-
-      - name: Build CARET
-        shell: bash
-        run: |
-          . /opt/ros/${{ matrix.ros_distro }}/setup.bash
-          colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
+          docker image build --no-cache=true -t --build-arg ROS_DISTRO=${{ matrix.ros_distro }} \
+          caret:${{ matrix.ros_distro }} -f ./docker/build_caret.dockerfile ./
