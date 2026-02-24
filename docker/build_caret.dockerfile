@@ -61,4 +61,3 @@ RUN cd ros2_caret_ws && \
       . $HOME/venv/jazzy/bin/activate ; \
     fi && \
     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
-
