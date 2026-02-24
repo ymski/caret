@@ -24,7 +24,8 @@ RUN git clone https://github.com/tier4/caret.git /ros2_caret_ws && \
 
 # Allow install system-wide pip packages
 RUN if [ "$ROS_DISTRO" = "jazzy" ]; then \
-        printf "[install]\nbreak-system-packages = true\n" > /etc/pip.conf ; \
+        printf "[install]\nbreak-system-packages = true\nignore-installed = true\n" \
+        > /etc/pip.conf ; \
     fi
 
 # cspell: disable
