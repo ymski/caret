@@ -22,10 +22,9 @@ RUN git clone https://github.com/tier4/caret.git /ros2_caret_ws && \
     cd /ros2_caret_ws && \
     git checkout ${CARET_VERSION}
 
+# Allow install system-wide pip packages
 RUN if [ "$ROS_DISTRO" = "jazzy" ]; then \
-      apt-get update && \
-      apt-get install -y python3-pip python3-virtualenv && \
-      virtualenv -p python3 --system-site-packages $HOME/venv/jazzy ; \
+        printf "[install]\nbreak-system-packages = true\n" > /etc/pip.conf ; \
     fi
 
 # cspell: disable
