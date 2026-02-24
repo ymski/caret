@@ -1,0 +1,33 @@
+name: Build CARET
+
+on:
+  schedule:
+    - cron: 0 17 * * * # run at 2 AM JST
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        ros_distro: [humble, iron, jazzy]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Clean up disk space
+        run: |
+          sudo apt-get autoremove -y
+          sudo apt-get clean
+          sudo rm -rf /usr/share/dotnet
+
+      - name: Docker Build
+        run: |
+          docker image build \
+            --no-cache \
+            --build-arg ROS_DISTRO=${{ matrix.ros_distro }} \
+            -t caret:${{ matrix.ros_distro }} \
+            -f ./docker/build_caret.dockerfile \
+            .
