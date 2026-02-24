@@ -22,11 +22,13 @@ RUN git clone https://github.com/tier4/caret.git /ros2_caret_ws && \
     cd /ros2_caret_ws && \
     git checkout ${CARET_VERSION}
 
+# cspell: disable
 RUN if [ "$ROS_DISTRO" = "jazzy" ]; then \
       apt-get update && \
       apt-get install -y python3-pip python3-virtualenv && \
       virtualenv -p python3 --system-site-packages $HOME/venv/jazzy ; \
     fi
+# cspell: enable
 
 # cspell: disable
 RUN apt update && apt install -y git && \
