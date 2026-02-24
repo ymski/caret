@@ -54,8 +54,5 @@ RUN cd ros2_caret_ws && \
 RUN echo "===== Build CARET ====="
 RUN cd ros2_caret_ws && \
     . /opt/ros/"$ROS_DISTRO"/setup.sh && \
-    if [ "$ROS_DISTRO" = "jazzy" ]; then \
-      . $HOME/venv/jazzy/bin/activate ; \
-    fi && \
     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
 
