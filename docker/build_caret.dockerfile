@@ -48,9 +48,6 @@ RUN cd ros2_caret_ws && \
     fi && \
     vcs import src < $REPOS_FILE && \
     . /opt/ros/"$ROS_DISTRO"/setup.sh && \
-    if [ "$ROS_DISTRO" = "jazzy" ]; then \
-        . $HOME/venv/jazzy/bin/activate ; \
-    fi && \
     ./setup_caret.sh -c -d "$ROS_DISTRO"
 
 RUN echo "===== Build CARET ====="
