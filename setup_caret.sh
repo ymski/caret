@@ -73,7 +73,7 @@ if [ "$ros_distro" = "jazzy" ]; then
         echo "Starting from this version, pip installation into system packages is restricted by default."
         echo "To proceed with the installation, please run the following command first to acknowledge the risk:"
         echo ""
-	echo -e "    \e[36m"export ALLOW_BREAK_SYSTEM_PACKAGES=true"\e[0m"
+        echo -e "    \e[36m"export ALLOW_BREAK_SYSTEM_PACKAGES=true"\e[0m"
         echo ""
         echo "Then, run this setup script again."
         exit 1
