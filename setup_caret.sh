@@ -3,6 +3,7 @@
 set -Ceu
 
 SCRIPT_DIR=$(readlink -f "$(dirname "$0")")
+PIP_BREAK_ENV="PIP_BREAK_SYSTEM_PACKAGES"
 
 function show_usage() {
     echo "${0} executes setup for CARET."
@@ -13,7 +14,7 @@ function show_usage() {
     echo "    -d or --ros-distro"
     echo ""
     echo "Required for ROS 2 Jazzy (Ubuntu 24.04+):"
-    echo "    export ALLOW_BREAK_SYSTEM_PACKAGES=true"
+    echo "    export ${PIP_BREAK_ENV}=1"
     echo "    (Allows pip to install packages into the system Python environment / PEP 668)"
     exit 0
 }
@@ -68,12 +69,13 @@ validate_ros_distro "$ros_distro"
 
 # Jazzy Specific Check for PEP 668 ---
 if [ "$ros_distro" = "jazzy" ]; then
-    if [ "${ALLOW_BREAK_SYSTEM_PACKAGES:-false}" != "true" ]; then
+    env_val="${!PIP_BREAK_ENV:-0}"
+    if [ "$env_val" != "1" ]; then
         echo -e "\e[31m[ERROR] Ubuntu 24.04 (Jazzy) detected.\e[0m"
         echo "Starting from this version, pip installation into system packages is restricted by default."
         echo "To proceed with the installation, please run the following command first to acknowledge the risk:"
         echo ""
-        echo -e "    \e[36m"export ALLOW_BREAK_SYSTEM_PACKAGES=true"\e[0m"
+	echo -e "    \e[36m"export ${PIP_BREAK_ENV}=1"\e[0m"
         echo ""
         echo "Then, run this setup script again."
         exit 1
@@ -115,7 +117,7 @@ fi
 # Run ansible if confirmed
 # Install ansible
 if [ "$ros_distro" = "jazzy" ]; then
-    pip3 install -U ansible --break-system-packages
+    pip3 install -U ansible
 else
     ansible_version=$(pip3 list | grep -oP "^ansible\s+\K([0-9]+)" || true)
     if [ "$ansible_version" != "6" ]; then
