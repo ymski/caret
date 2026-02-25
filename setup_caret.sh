@@ -11,6 +11,10 @@ function show_usage() {
     echo "    -c or --no-interactive"
     echo "    -n or --no-package-install"
     echo "    -d or --ros-distro"
+    echo ""
+    echo "Required for ROS 2 Jazzy (Ubuntu 24.04+):"
+    echo "    export ALLOW_BREAK_SYSTEM_PACKAGES=true"
+    echo "    (Allows pip to install packages into the system Python environment / PEP 668)"
     exit 0
 }
 
@@ -61,6 +65,20 @@ done
 
 # Check ROS Distribution
 validate_ros_distro "$ros_distro"
+
+# Jazzy Specific Check for PEP 668 ---
+if [ "$ros_distro" = "jazzy" ]; then
+    if [ "${ALLOW_BREAK_SYSTEM_PACKAGES:-false}" != "true" ]; then
+        echo -e "\e[31m[ERROR] Ubuntu 24.04 (Jazzy) detected.\e[0m"
+        echo "Starting from this version, pip installation into system packages is restricted by default."
+        echo "To proceed with the installation, please run the following command first to acknowledge the risk:"
+        echo ""
+        echo -e "    \e[36mexport ALLOW_BREAK_SYSTEM_PACKAGES=true\e[0m"
+        echo ""
+        echo "Then, run this setup script again."
+        exit 1
+    fi
+fi
 
 # Confirm whether to start installation
 if [ $noninteractive -eq 0 ]; then
