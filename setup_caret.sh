@@ -64,6 +64,9 @@ while true; do
     esac
 done
 
+# Add local path
+export PATH="$HOME/.local/bin:$PATH"
+
 # Check ROS Distribution
 validate_ros_distro "$ros_distro"
 
