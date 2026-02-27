@@ -47,6 +47,8 @@ RUN cd ros2_caret_ws && \
     . /opt/ros/"$ROS_DISTRO"/setup.sh && \
     ./setup_caret.sh -c -d "$ROS_DISTRO"
 
+RUN pip list
+
 RUN echo "===== Build CARET ====="
 RUN cd ros2_caret_ws && \
     . /opt/ros/"$ROS_DISTRO"/setup.sh && \
